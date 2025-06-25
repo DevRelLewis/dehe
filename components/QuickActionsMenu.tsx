@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CreditCard, FileText, Plus, DollarSign, Calendar, CreditCard as CardIcon, X, AlertTriangle, CheckCircle, Clock, Building, CalendarCheck, CalendarPlus } from 'lucide-react';
-import { PatientData, Charge, Memo, PaymentMethod } from '../types/patient';
+import { CreditCard, FileText, Plus, Calendar, CreditCard as CardIcon, X, Building, CalendarCheck, CalendarPlus } from 'lucide-react';
+import { PatientData, Charge, Memo } from '../types/patient';
 
 interface QuickActionsMenuProps {
   patientData: PatientData;
@@ -10,7 +10,7 @@ interface QuickActionsMenuProps {
 const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onDataUpdate }) => {
   const [showChargeModal, setShowChargeModal] = useState(false);
   const [showMemoModal, setShowMemoModal] = useState(false);
-  // 🔥 NEW: Schedule Payment Modal State
+  // Schedule Payment Modal State
   const [showSchedulePaymentModal, setShowSchedulePaymentModal] = useState(false);
   const [selectedCharges, setSelectedCharges] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -18,7 +18,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
   const [memoText, setMemoText] = useState('');
   const [isAddingMemo, setIsAddingMemo] = useState(false);
 
-  // 🔥 NEW: Schedule Payment Form State
+  // Schedule Payment Form State
   const [scheduleForm, setScheduleForm] = useState({
     selectedChargeIds: [] as string[],
     scheduledDate: '',
@@ -68,7 +68,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
   const outstandingCharges = localCharges.filter(charge => charge.totalOutstanding > 0);
   const totalOutstanding = outstandingCharges.reduce((sum, charge) => sum + charge.totalOutstanding, 0);
 
-  // 🔥 NEW: Get charges eligible for scheduling (no existing scheduled payment)
+  // Get charges eligible for scheduling (no existing scheduled payment)
   const eligibleChargesForScheduling = outstandingCharges.filter(charge => !charge.scheduledPaymentDate);
 
   const actions = [
@@ -109,7 +109,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
       color: 'bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700',
       textColor: 'text-white'
     },
-    // 🔥 NEW: Schedule Payment Action
+    // Schedule Payment Action
     {
       icon: CalendarPlus,
       label: 'Schedule Payment',
@@ -143,7 +143,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
     }
   ];
 
-  // 🔥 NEW: Handle Schedule Payment Form Changes
+  // Handle Schedule Payment Form Changes
   const handleScheduleFormChange = (field: string, value: any) => {
     setScheduleForm(prev => ({
       ...prev,
@@ -173,7 +173,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
     }, 0);
   };
 
-  // 🔥 NEW: Process Scheduled Payment
+  // Process Scheduled Payment
   const processSchedulePayment = async () => {
     if (scheduleForm.selectedChargeIds.length === 0 || !scheduleForm.scheduledDate || !scheduleForm.scheduledTime) {
       alert('Please fill in all required fields.');
@@ -237,7 +237,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
       updatedDate: new Date().toISOString()
     };
 
-    // 🔥 CRITICAL: Update patient data with new charges and memo
+    // Update patient data with new charges and memo
     const updatedPatientData: PatientData = {
       ...patientData,
       charges: updatedCharges,
@@ -247,7 +247,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
     // Update local state immediately for responsive UI
     setLocalCharges(updatedCharges);
 
-    // 🔥 CRITICAL: Propagate changes to parent components via callback
+    // Propagate changes to parent components via callback
     if (onDataUpdate) {
       onDataUpdate(updatedPatientData);
     }
@@ -458,7 +458,7 @@ const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({ patientData, onData
         </div>
       </div>
 
-      {/* 🔥 NEW: Schedule Payment Modal */}
+      {/* Schedule Payment Modal */}
       {showSchedulePaymentModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
           <div className="bg-white rounded-xl max-w-4xl w-full shadow-2xl max-h-[90vh] flex flex-col">

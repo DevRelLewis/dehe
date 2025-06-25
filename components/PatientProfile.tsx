@@ -1,4 +1,3 @@
-// components/PatientProfile.tsx - Updated with Enhanced Appointments Support
 import React, { useState, useMemo } from 'react';
 import { ChevronDown, ChevronUp, AlertTriangle, Clock, DollarSign, FileText, Bell, Brain } from 'lucide-react';
 import PatientHeaderCard from './PatientHeaderCard';

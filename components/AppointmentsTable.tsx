@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, CheckCircle, AlertCircle, Edit3, X, Save, RotateCcw } from 'lucide-react';
+import { Calendar, Clock, MapPin, CheckCircle, AlertCircle, Edit3, X, RotateCcw } from 'lucide-react';
 import { Event, PatientData } from '../types/patient';
 
 interface AppointmentsTableProps {

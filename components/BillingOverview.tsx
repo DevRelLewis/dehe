@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DollarSign, CreditCard, AlertTriangle, CheckCircle, Calendar, User, Clock, Bell, Zap, TrendingUp } from 'lucide-react';
+import { DollarSign, CreditCard, AlertTriangle, CheckCircle, Calendar, User, Clock, Zap, TrendingUp } from 'lucide-react';
 import { Charge, PaymentMethod, PatientData } from '../types/patient';
 
 interface BillingOverviewProps {
@@ -87,7 +87,7 @@ const BillingOverview: React.FC<BillingOverviewProps> = ({
 
   // Additional effect to handle real-time updates from Quick Actions
   useEffect(() => {
-    // Force re-render when charges prop changes (e.g., from QuickActions scheduling)
+    // Force re-render when charges prop changes
     setProcessedCharges(charges);
     setLastUpdateTimestamp(Date.now());
   }, [charges]);

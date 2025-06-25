@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, Phone, Mail, MapPin, Calendar, Activity, Weight, Ruler, AlertTriangle, Pill, Heart, Users } from 'lucide-react';
-import { Patient, Measurement } from '../types/patient';
+import { Patient } from '../types/patient';
 
 interface PatientHeaderCardProps {
   patient: Patient;
