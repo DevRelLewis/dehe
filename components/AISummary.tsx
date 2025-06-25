@@ -22,7 +22,8 @@ const AISummary: React.FC<AISummaryProps> = ({ data }) => {
   }, [data]);
 
   const generateAISummary = () => {
-    const { patient, doctorsNotes, memos, alerts } = data;
+    // add in memos if needed
+    const { patient, doctorsNotes, alerts } = data;
     
     // Generate summary based on available data (excluding financial info)
     const age = new Date().getFullYear() - new Date(patient.dateOfBirth).getFullYear();
@@ -37,7 +38,7 @@ const AISummary: React.FC<AISummaryProps> = ({ data }) => {
 
     if (recentNotes.length > 0) {
       const latestNote = recentNotes[0];
-      summaryText += `Most recent visit focused on ${latestNote.summary.toLowerCase()}. `;
+      summaryText += `Most recent visit focused on ${latestNote.summary.toLowerCase()}.`;
     }
 
     if (activeAlerts > 0) {
